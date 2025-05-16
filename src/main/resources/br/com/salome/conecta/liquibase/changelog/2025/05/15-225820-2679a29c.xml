@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+    <changeSet id="1" author="salome-conecta">
+        <createTable tableName="CLIENTE">
+            <column name="ID" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_CLIENTE"/>
+            </column>
+            <column name="CNPJ" type="VARCHAR(18)"/>
+            <column name="RAZAO_SOCIAL" type="VARCHAR(120)"/>
+            <column name="APROVADO" type="BOOLEAN"/>
+            <column name="CREATED_BY" type="VARCHAR(255)"/>
+            <column name="CREATED_DATE" type="timestamp with time zone"/>
+            <column name="LAST_MODIFIED_BY" type="VARCHAR(255)"/>
+            <column name="LAST_MODIFIED_DATE" type="timestamp with time zone"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="2" author="salome-conecta">
+        <createTable tableName="CTE">
+            <column name="ID" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_CTE"/>
+            </column>
+            <column name="NUMERO_CTE" type="VARCHAR(255)"/>
+            <column name="DATA_EMISSAO" type="DATE"/>
+            <column name="NUMEROS_NFE" type="VARCHAR(255)"/>
+            <column name="REMETENTE_CNPJ" type="VARCHAR(255)"/>
+            <column name="REMENTE_RAZAO_SOCIAL" type="VARCHAR(255)"/>
+            <column name="CIDADE_ORIGEM" type="VARCHAR(255)"/>
+            <column name="DESTINATARIO_CNPJ" type="VARCHAR(255)"/>
+            <column name="DESTINATARIO_RAZAO_SOCIAL" type="VARCHAR(255)"/>
+            <column name="CIDADE_DESTINO" type="VARCHAR(255)"/>
+            <column name="TIPO_FRETE" type="VARCHAR(255)"/>
+            <column name="QUANTIDADE_VOLUMES" type="DECIMAL(19)"/>
+            <column name="PESO" type="DOUBLE"/>
+            <column name="DATA_ENTREGA" type="DATE"/>
+            <column name="STATUS" type="VARCHAR(255)"/>
+            <column name="COMPROVANTE_ENTREGA" type="VARCHAR(1024)"/>
+            <column name="CREATED_BY" type="VARCHAR(255)"/>
+            <column name="CREATED_DATE" type="timestamp with time zone"/>
+            <column name="LAST_MODIFIED_BY" type="VARCHAR(255)"/>
+            <column name="LAST_MODIFIED_DATE" type="timestamp with time zone"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="3" author="salome-conecta">
+        <createTable tableName="FATURA">
+            <column name="ID" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_FATURA"/>
+            </column>
+            <column name="STATUS_FATURA" type="VARCHAR(255)"/>
+            <column name="CLIENTE_CNPJ" type="VARCHAR(255)"/>
+            <column name="CLIENTE_RAZAO_SOCIAL" type="VARCHAR(255)"/>
+            <column name="PDF_FATURA" type="VARCHAR(1024)"/>
+            <column name="PDF_BOLETO" type="VARCHAR(1024)"/>
+            <column name="RELACAO_CTE" type="VARCHAR(255)"/>
+            <column name="NUMERO_FATURA" type="VARCHAR(255)"/>
+            <column name="DATA_EMISSAO" type="DATE"/>
+            <column name="VENCIMENTO" type="DATE"/>
+            <column name="VALOR" type="DECIMAL(19, 2)"/>
+            <column name="CREATED_BY" type="VARCHAR(255)"/>
+            <column name="CREATED_DATE" type="timestamp with time zone"/>
+            <column name="LAST_MODIFIED_BY" type="VARCHAR(255)"/>
+            <column name="LAST_MODIFIED_DATE" type="timestamp with time zone"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>
