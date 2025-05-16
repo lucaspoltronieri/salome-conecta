@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+    <changeSet id="1" author="salome-conecta">
+        <createTable tableName="TRANSPORTADORA">
+            <column name="ID" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TRANSPORTADORA"/>
+            </column>
+            <column name="RAZAO_SOCIAL" type="VARCHAR(255)"/>
+            <column name="EMAIL" type="VARCHAR(255)"/>
+            <column name="TELEFONE" type="VARCHAR(255)"/>
+            <column name="NOME" type="VARCHAR(255)"/>
+            <column name="CNPJ" type="VARCHAR(255)"/>
+            <column name="ATIVA" type="BOOLEAN"/>
+            <column name="CREATED_BY" type="VARCHAR(255)"/>
+            <column name="CREATED_DATE" type="timestamp with time zone"/>
+            <column name="LAST_MODIFIED_BY" type="VARCHAR(255)"/>
+            <column name="LAST_MODIFIED_DATE" type="timestamp with time zone"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="2" author="salome-conecta">
+        <addColumn tableName="USER_">
+            <column name="ATIVO" type="BOOLEAN"/>
+            <column name="CARGO" type="VARCHAR(255)"/>
+            <column name="CLIENTE_ID" type="UUID"/>
+            <column name="CREATED_BY" type="VARCHAR(255)"/>
+            <column name="CREATED_DATE" type="timestamp with time zone"/>
+            <column name="LAST_MODIFIED_BY" type="VARCHAR(255)"/>
+            <column name="LAST_MODIFIED_DATE" type="timestamp with time zone"/>
+            <column name="STATUS" type="VARCHAR(255)"/>
+            <column name="TELEFONE" type="VARCHAR(255)"/>
+            <column name="TRANSPORTADORA_ID" type="UUID"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="3" author="salome-conecta">
+        <addColumn tableName="USER_">
+            <column name="DTYPE" type="VARCHAR(31)"/>
+        </addColumn>
+
+        <update tableName="USER_">
+            <column name="DTYPE" value="User"/>
+            <where>DTYPE is null</where>
+        </update>
+    </changeSet>
+    <changeSet id="4" author="salome-conecta">
+        <createIndex indexName="IDX_USER__CLIENTE" tableName="USER_">
+            <column name="CLIENTE_ID"/>
+        </createIndex>
+
+        <addForeignKeyConstraint baseColumnNames="CLIENTE_ID" baseTableName="USER_" constraintName="FK_USER__ON_CLIENTE"
+                                 onDelete="CASCADE" referencedColumnNames="ID" referencedTableName="CLIENTE"/>
+    </changeSet>
+    <changeSet id="5" author="salome-conecta">
+        <createIndex indexName="IDX_USER__TRANSPORTADORA" tableName="USER_">
+            <column name="TRANSPORTADORA_ID"/>
+        </createIndex>
+
+        <addForeignKeyConstraint baseColumnNames="TRANSPORTADORA_ID" baseTableName="USER_"
+                                 constraintName="FK_USER__ON_TRANSPORTADORA" onDelete="CASCADE"
+                                 referencedColumnNames="ID" referencedTableName="TRANSPORTADORA"/>
+    </changeSet>
+</databaseChangeLog>

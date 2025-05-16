@@ -15,13 +15,16 @@ import java.time.OffsetDateTime;
 import java.util.UUID;
 
 @JmixEntity
-@Table(name = "CLIENTE")
+@Table(name = "TRANSPORTADORA")
 @Entity
-public class Cliente {
+public class Transportadora {
     @JmixGeneratedValue
     @Column(name = "ID", nullable = false)
     @Id
     private UUID id;
+
+    @Column(name = "RAZAO_SOCIAL")
+    private String razaoSocial;
 
     @Column(name = "EMAIL")
     private String email;
@@ -29,14 +32,14 @@ public class Cliente {
     @Column(name = "TELEFONE")
     private String telefone;
 
-    @Column(name = "CNPJ", length = 18)
+    @Column(name = "NOME")
+    private String nomeFantasia;
+
+    @Column(name = "CNPJ")
     private String cnpj;
 
-    @Column(name = "RAZAO_SOCIAL", length = 120)
-    private String razaoSocial;
-
-    @Column(name = "APROVADO")
-    private Boolean aprovado;
+    @Column(name = "ATIVA")
+    private Boolean ativa;
 
     @CreatedBy
     @Column(name = "CREATED_BY")
@@ -54,6 +57,14 @@ public class Cliente {
     @Column(name = "LAST_MODIFIED_DATE")
     private OffsetDateTime lastModifiedDate;
 
+    public Boolean getAtiva() {
+        return ativa;
+    }
+
+    public void setAtiva(Boolean ativa) {
+        this.ativa = ativa;
+    }
+
     public String getTelefone() {
         return telefone;
     }
@@ -70,14 +81,6 @@ public class Cliente {
         this.email = email;
     }
 
-    public Boolean getAprovado() {
-        return aprovado;
-    }
-
-    public void setAprovado(Boolean aprovado) {
-        this.aprovado = aprovado;
-    }
-
     public String getRazaoSocial() {
         return razaoSocial;
     }
@@ -92,6 +95,14 @@ public class Cliente {
 
     public void setCnpj(String cnpj) {
         this.cnpj = cnpj;
+    }
+
+    public String getNomeFantasia() {
+        return nomeFantasia;
+    }
+
+    public void setNomeFantasia(String nome) {
+        this.nomeFantasia = nome;
     }
 
     public OffsetDateTime getLastModifiedDate() {

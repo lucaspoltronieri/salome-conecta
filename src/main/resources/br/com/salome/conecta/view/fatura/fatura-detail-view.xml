@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<view xmlns="http://jmix.io/schema/flowui/view"
+      title="msg://faturaDetailView.title"
+      focusComponent="form">
+    <data>
+        <instance id="faturaDc"
+                  class="br.com.salome.conecta.entity.Fatura">
+            <fetchPlan extends="_base"/>
+            <loader id="faturaDl"/>
+        </instance>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+    </facets>
+    <actions>
+        <action id="saveAction" type="detail_saveClose"/>
+        <action id="closeAction" type="detail_close"/>
+    </actions>
+    <layout>
+        <formLayout id="form" dataContainer="faturaDc">
+            <responsiveSteps>
+                <responsiveStep minWidth="0" columns="1"/>
+                <responsiveStep minWidth="40em" columns="2"/>
+            </responsiveSteps>
+            <textField id="statusFaturaField" property="statusFatura"/>
+            <textField id="clienteCnpjField" property="clienteCnpj"/>
+            <textField id="clienteRazaoSocialField" property="clienteRazaoSocial"/>
+            <fileStorageUploadField id="pdfFaturaField" clearButtonVisible="true" fileNameVisible="true"
+                                    property="pdfFatura"/>
+            <fileStorageUploadField id="pdfBoletoField" clearButtonVisible="true" fileNameVisible="true"
+                                    property="pdfBoleto"/>
+            <textField id="relacaoCteField" property="relacaoCte"/>
+            <textField id="numeroFaturaField" property="numeroFatura"/>
+            <datePicker id="dataEmissaoField" property="dataEmissao"/>
+            <datePicker id="vencimentoField" property="vencimento"/>
+            <textField id="valorField" property="valor"/>
+        </formLayout>
+        <hbox id="detailActions">
+            <button id="saveAndCloseButton" action="saveAction"/>
+            <button id="closeButton" action="closeAction"/>
+        </hbox>
+    </layout>
+</view>

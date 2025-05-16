@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<view xmlns="http://jmix.io/schema/flowui/view"
+      xmlns:c="http://jmix.io/schema/flowui/jpql-condition"
+      title="msg://cteListView.title"
+      focusComponent="ctesDataGrid">
+    <data>
+        <collection id="ctesDc"
+                    class="br.com.salome.conecta.entity.Cte">
+            <fetchPlan extends="_base"/>
+            <loader id="ctesDl" readOnly="true">
+                <query>
+                    <![CDATA[select e from Cte e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+        <urlQueryParameters>
+            <genericFilter component="genericFilter"/>
+            <pagination component="pagination"/>
+        </urlQueryParameters>
+    </facets>
+    <actions>
+        <action id="selectAction" type="lookup_select"/>
+        <action id="discardAction" type="lookup_discard"/>
+    </actions>
+    <layout>
+        <genericFilter id="genericFilter"
+                       dataLoader="ctesDl">
+            <properties include=".*"/>
+        </genericFilter>
+        <hbox id="buttonsPanel" classNames="buttons-panel">
+            <button id="createButton" action="ctesDataGrid.createAction"/>
+            <button id="editButton" action="ctesDataGrid.editAction"/>
+            <button id="removeButton" action="ctesDataGrid.removeAction"/>
+            <simplePagination id="pagination" dataLoader="ctesDl"/>
+        </hbox>
+        <dataGrid id="ctesDataGrid"
+                  width="100%"
+                  minHeight="20em"
+                  dataContainer="ctesDc"
+                  columnReorderingAllowed="true">
+            <actions>
+                <action id="createAction" type="list_create"/>
+                <action id="editAction" type="list_edit"/>
+                <action id="removeAction" type="list_remove"/>
+            </actions>
+            <columns resizable="true">
+                <column property="numeroCte"/>
+                <column property="dataEmissao"/>
+                <column property="numerosNfe"/>
+                <column property="remetenteCnpj"/>
+                <column property="rementeRazaoSocial"/>
+                <column property="cidadeOrigem"/>
+                <column property="destinatarioCnpj"/>
+                <column property="destinatarioRazaoSocial"/>
+                <column property="cidadeDestino"/>
+                <column property="tipoFrete"/>
+                <column property="quantidadeVolumes"/>
+                <column property="peso"/>
+                <column property="dataEntrega"/>
+                <column property="status"/>
+                <column property="comprovanteEntrega"/>
+            </columns>
+        </dataGrid>
+        <hbox id="lookupActions" visible="false">
+            <button id="selectButton" action="selectAction"/>
+            <button id="discardButton" action="discardAction"/>
+        </hbox>
+    </layout>
+</view>

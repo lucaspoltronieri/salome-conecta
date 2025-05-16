@@ -3,6 +3,14 @@
 
     <menu id="application" title="msg://br.com.salome.conecta/menu.application.title" opened="true">
         <item view="User.list" title="msg://br.com.salome.conecta.view.user/UserListView.title"/>
+        <item view="Transportadora.list"
+              title="msg://br.com.salome.conecta.view.transportadora/transportadoraListView.title"/>
+        <item view="UserTransportadora.list"
+              title="msg://br.com.salome.conecta.view.usertransportadora/userTransportadoraListView.title"/>
+        <item view="UserCliente.list" title="msg://br.com.salome.conecta.view.usercliente/userClienteListView.title"/>
+        <item view="Cte.list" title="msg://br.com.salome.conecta.view.cte/cteListView.title"/>
+        <item view="Fatura.list" title="msg://br.com.salome.conecta.view.fatura/faturaListView.title"/>
+        <item view="Cliente.list" title="msg://br.com.salome.conecta.view.cliente/clienteListView.title"/>
     </menu>
 
 </menu-config>

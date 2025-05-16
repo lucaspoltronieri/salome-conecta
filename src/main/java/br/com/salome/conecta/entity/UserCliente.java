@@ -1,46 +1,39 @@
 package br.com.salome.conecta.entity;
 
-import io.jmix.core.entity.annotation.JmixGeneratedValue;
+import io.jmix.core.DeletePolicy;
+import io.jmix.core.entity.annotation.OnDeleteInverse;
 import io.jmix.core.metamodel.annotation.JmixEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.OffsetDateTime;
-import java.util.UUID;
 
 @JmixEntity
-@Table(name = "CLIENTE")
 @Entity
-public class Cliente {
-    @JmixGeneratedValue
-    @Column(name = "ID", nullable = false)
-    @Id
-    private UUID id;
+public class UserCliente extends User {
+    @CreatedBy
+    @Column(name = "CREATED_BY")
+    private String createdBy;
 
-    @Column(name = "EMAIL")
-    private String email;
+    @OnDeleteInverse(DeletePolicy.CASCADE)
+    @JoinColumn(name = "CLIENTE_ID")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Cliente cliente;
 
     @Column(name = "TELEFONE")
     private String telefone;
 
-    @Column(name = "CNPJ", length = 18)
-    private String cnpj;
+    @Column(name = "CARGO")
+    private String cargo;
 
-    @Column(name = "RAZAO_SOCIAL", length = 120)
-    private String razaoSocial;
+    @Column(name = "STATUS")
+    private String status;
 
-    @Column(name = "APROVADO")
-    private Boolean aprovado;
-
-    @CreatedBy
-    @Column(name = "CREATED_BY")
-    private String createdBy;
+    @Column(name = "ATIVO")
+    private Boolean ativo;
 
     @CreatedDate
     @Column(name = "CREATED_DATE")
@@ -54,6 +47,30 @@ public class Cliente {
     @Column(name = "LAST_MODIFIED_DATE")
     private OffsetDateTime lastModifiedDate;
 
+    public Boolean getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(Boolean ativo) {
+        this.ativo = ativo;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getCargo() {
+        return cargo;
+    }
+
+    public void setCargo(String cargo) {
+        this.cargo = cargo;
+    }
+
     public String getTelefone() {
         return telefone;
     }
@@ -62,36 +79,12 @@ public class Cliente {
         this.telefone = telefone;
     }
 
-    public String getEmail() {
-        return email;
+    public Cliente getCliente() {
+        return cliente;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public Boolean getAprovado() {
-        return aprovado;
-    }
-
-    public void setAprovado(Boolean aprovado) {
-        this.aprovado = aprovado;
-    }
-
-    public String getRazaoSocial() {
-        return razaoSocial;
-    }
-
-    public void setRazaoSocial(String razaoSocial) {
-        this.razaoSocial = razaoSocial;
-    }
-
-    public String getCnpj() {
-        return cnpj;
-    }
-
-    public void setCnpj(String cnpj) {
-        this.cnpj = cnpj;
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     public OffsetDateTime getLastModifiedDate() {
@@ -124,14 +117,6 @@ public class Cliente {
 
     public void setCreatedBy(String createdBy) {
         this.createdBy = createdBy;
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
     }
 
 }
